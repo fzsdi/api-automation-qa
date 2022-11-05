@@ -29,4 +29,10 @@ ER stands for expected result and the emoji shown in front of the ER represents 
   * ER: it should not be order sensitive and should return valid reponse even with an unordered request parameters. ✔️
 
 ## In Postman
-![image](https://user-images.githubusercontent.com/40931282/200143845-06e96f29-26a5-4926-8205-3593b0cb7c29.png)
+To run the automated test cases and start testing the API, import `postman_collection.json` in Postman.<br/> Note that before running the collection, go to https://newsapi.org to get a free API key and add it to the `Authorization` tab of the collection in Postman.
+
+<img width="679" alt="image" src="https://user-images.githubusercontent.com/40931282/200144141-410b2b87-e6e3-4ead-8556-db57468ff6a4.png">
+
+After that you can send the request and see the tests results.
+
+<img width="571" alt="image" src="https://user-images.githubusercontent.com/40931282/200144351-4426e4b4-4a96-47ae-ac75-3801de140496.png">
