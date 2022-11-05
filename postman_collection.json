@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "3501ebfd-7d4d-4671-b988-0498924432ae",
+		"name": "News QA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5537984"
+	},
+	"item": [
+		{
+			"name": "GET News",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {",
+							"    \"$schema\": \"https://json-schema.org/draft/2019-09/schema\",",
+							"    \"$id\": \"http://example.com/example.json\",",
+							"    \"title\": \"Root Schema\",",
+							"    \"type\": \"object\",",
+							"    \"default\": {},",
+							"    \"required\": [",
+							"        \"status\",",
+							"        \"totalResults\",",
+							"        \"articles\"",
+							"    ],",
+							"    \"properties\": {",
+							"        \"status\": {",
+							"            \"title\": \"The status Schema\",",
+							"            \"type\": \"string\",",
+							"            \"default\": \"\"",
+							"        },",
+							"        \"totalResults\": {",
+							"            \"title\": \"The totalResults Schema\",",
+							"            \"type\": \"integer\",",
+							"            \"default\": 0",
+							"        },",
+							"        \"articles\": {",
+							"            \"title\": \"The articles Schema\",",
+							"            \"type\": \"array\",",
+							"            \"default\": [],",
+							"            \"items\": {",
+							"                \"title\": \"A Schema\",",
+							"                \"type\": \"object\",",
+							"                \"required\": [",
+							"                    \"source\",",
+							"                    \"author\",",
+							"                    \"title\",",
+							"                    \"description\",",
+							"                    \"url\",",
+							"                    \"urlToImage\",",
+							"                    \"publishedAt\",",
+							"                    \"content\"",
+							"                ],",
+							"                \"properties\": {",
+							"                    \"source\": {",
+							"                        \"title\": \"The source Schema\",",
+							"                        \"type\": \"object\",",
+							"                        \"required\": [",
+							"                            \"id\",",
+							"                            \"name\"",
+							"                        ],",
+							"                        \"properties\": {",
+							"                            \"id\": {",
+							"                                \"title\": \"The id Schema\",",
+							"                                \"type\": [",
+							"                                    \"null\",",
+							"                                    \"string\",",
+							"                                    \"number\"",
+							"                                ]",
+							"                            },",
+							"                            \"name\": {",
+							"                                \"title\": \"The name Schema\",",
+							"                                \"type\": \"string\"",
+							"                            }",
+							"                        }",
+							"                    },",
+							"                    \"author\": {",
+							"                        \"title\": \"The author Schema\",",
+							"                        \"type\": [",
+							"                            \"string\",",
+							"                            \"null\"",
+							"                        ]",
+							"                    },",
+							"                    \"title\": {",
+							"                        \"title\": \"The title Schema\",",
+							"                        \"type\": [",
+							"                            \"string\",",
+							"                            \"null\"",
+							"                        ]",
+							"                    },",
+							"                    \"description\": {",
+							"                        \"title\": \"The description Schema\",",
+							"                        \"type\": [",
+							"                            \"string\",",
+							"                            \"null\"",
+							"                        ]",
+							"                    },",
+							"                    \"url\": {",
+							"                        \"title\": \"The url Schema\",",
+							"                        \"type\": [",
+							"                            \"string\",",
+							"                            \"null\"",
+							"                        ]",
+							"                    },",
+							"                    \"urlToImage\": {",
+							"                        \"title\": \"The urlToImage Schema\",",
+							"                        \"type\": [",
+							"                            \"string\",",
+							"                            \"null\"",
+							"                        ]",
+							"                    },",
+							"                    \"publishedAt\": {",
+							"                        \"title\": \"The publishedAt Schema\",",
+							"                        \"type\": [",
+							"                            \"string\",",
+							"                            \"null\"",
+							"                        ]",
+							"                    },",
+							"                    \"content\": {",
+							"                        \"title\": \"The content Schema\",",
+							"                        \"type\": [",
+							"                            \"string\",",
+							"                            \"null\"",
+							"                        ]",
+							"                    }",
+							"                }",
+							"            }",
+							"        }",
+							"    }",
+							"}",
+							"var jsonData = pm.response.json();",
+							"var query = {};",
+							"pm.request.url.query.all().forEach((param) => { query[param.key] = param.value});",
+							"var sortBy = query.sortBy;",
+							"var _ = require('lodash');",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Valid response\", function () {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"    pm.expect(jsonData.status).to.eql(\"ok\");",
+							"});",
+							"",
+							"pm.test(\"Has results\", function () {",
+							"    pm.expect(jsonData.totalResults).greaterThan(0);",
+							"})",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"status\"); // field status",
+							"    pm.expect(pm.response.text()).to.include(\"totalResults\");",
+							"    pm.expect(pm.response.text()).to.include(\"articles\");",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"",
+							"pm.test('Schema is valid', function () {",
+							"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true; // ajv",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"if(sortBy === \"publishedAt\") {",
+							"    pm.test(\"Order by publishedAt\", function () {",
+							"        var expectedSortOrder = _.orderBy(jsonData.articles, item => item.publishedAt, ['desc']);",
+							"        pm.expect(jsonData.articles).to.eql(expectedSortOrder);",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "https://newsapi.org/v2/everything?q=Starlink&sortBy=publishedAt&from=2022-11-05",
+					"protocol": "https",
+					"host": [
+						"newsapi",
+						"org"
+					],
+					"path": [
+						"v2",
+						"everything"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Starlink"
+						},
+						{
+							"key": "sortBy",
+							"value": "publishedAt"
+						},
+						{
+							"key": "from",
+							"value": "2022-11-05"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "YOUR_API_KEY",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "X-Api-Key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
