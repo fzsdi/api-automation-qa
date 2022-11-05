@@ -27,3 +27,6 @@ ER stands for expected result and the emoji shown in front of the ER represents 
   * ER: the header should contain `Content-Type`. ✔️
 - **Check the order of parameters in request**
   * ER: it should not be order sensitive and should return valid reponse even with an unordered request parameters. ✔️
+
+## In Postman
+![image](https://user-images.githubusercontent.com/40931282/200143845-06e96f29-26a5-4926-8205-3593b0cb7c29.png)
